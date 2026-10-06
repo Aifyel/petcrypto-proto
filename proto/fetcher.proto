@@ -1,0 +1,22 @@
+syntax = "proto3";
+package petcrypto;
+option go_package = "github.com/Aifyel/petcrypto-proto/gen";
+import "google/protobuf/timestamp.proto";
+
+message FetchNewRatesRequest {
+  repeated string currencies = 1;
+}
+
+message CurrencyRate {
+    string currency = 1;
+    double price = 2;
+    google.protobuf.Timestamp fetched_at = 3;
+}
+
+message FetchNewRatesResponse {
+    repeated CurrencyRate rates = 1;
+}
+
+service FetcherService {
+  rpc FetchNewRates(FetchNewRatesRequest) returns (FetchNewRatesResponse);
+}
